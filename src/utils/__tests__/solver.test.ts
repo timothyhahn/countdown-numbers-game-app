@@ -1,6 +1,6 @@
 import {describe, it, expect} from 'vitest';
 import {
-	solvePuzzle, getFirstSolution, formatExpression, type SolverResult,
+	solvePuzzle, getFirstSolution, formatExpression,
 } from '../solver';
 import {Operation} from '../../types/Operation';
 

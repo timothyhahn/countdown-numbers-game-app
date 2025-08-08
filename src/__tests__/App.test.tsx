@@ -27,7 +27,7 @@ describe('App component', () => {
 
 		// Should show target number (3-digit number)
 		const targetElement = screen.getByRole('generic', {
-			name: (content, element) => element?.classList.contains('bg-red-500')
+			name: (_content, element) => element?.classList.contains('bg-red-500')
 				&& /^\d{3}$/.test(element.textContent || ''),
 		});
 		expect(targetElement).toBeInTheDocument();
@@ -73,7 +73,7 @@ describe('App component', () => {
 
 		// Should still have a target number (3-digit)
 		const targetElement = screen.getByRole('generic', {
-			name: (content, element) => element?.classList.contains('bg-red-500')
+			name: (_content, element) => element?.classList.contains('bg-red-500')
 				&& /^\d{3}$/.test(element.textContent || ''),
 		});
 		expect(targetElement).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe('App component', () => {
 	it('should have red target initially (not complete)', () => {
 		render(<App />);
 		const targetElement = screen.getByRole('generic', {
-			name: (content, element) => element?.classList.contains('bg-red-500')
+			name: (_content, element) => element?.classList.contains('bg-red-500')
 				&& /^\d{3}$/.test(element.textContent || ''),
 		});
 		expect(targetElement).toHaveClass('bg-red-500');

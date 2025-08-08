@@ -4,7 +4,7 @@ import Numbers from './components/Numbers';
 import Operations from './components/Operations';
 import Solutions from './components/Solutions';
 import Controls from './components/Controls';
-import {type Operation, parseOperation} from './types/Operation';
+import {type Operation} from './types/Operation';
 import {evaluateExpression} from './utils/calculator';
 import {getFirstSolution, formatExpression} from './utils/solver';
 
@@ -153,7 +153,7 @@ function App() {
 			// Remove number from available numbers
 			setGameState(previous => ({
 				...previous,
-				availableNumbers: previous.availableNumbers.filter((number_, index) => {
+				availableNumbers: previous.availableNumbers.filter((_number, index) => {
 					const firstMatch = previous.availableNumbers.indexOf(item);
 					return index !== firstMatch;
 				}),

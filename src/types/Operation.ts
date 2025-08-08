@@ -1,13 +1,15 @@
-export enum Operation {
-	ADD = '+',
-	SUBTRACT = '-',
-	MULTIPLY = '×',
-	DIVIDE = '÷',
-	OPEN_PAREN = '(',
-	CLOSE_PAREN = ')',
-}
+export const Operation = {
+	ADD: '+',
+	SUBTRACT: '-',
+	MULTIPLY: '×',
+	DIVIDE: '÷',
+	OPEN_PAREN: '(',
+	CLOSE_PAREN: ')',
+} as const;
 
-export const getOperationSymbol = (operation: Operation): string => operation.valueOf();
+export type Operation = typeof Operation[keyof typeof Operation];
+
+export const getOperationSymbol = (operation: Operation): string => operation;
 
 export const getOperationName = (operation: Operation): string => {
 	switch (operation) {
@@ -64,7 +66,7 @@ export const parseOperation = (symbol: string): Operation | undefined => {
 		}
 
 		default: {
-			return null;
+			return undefined;
 		}
 	}
 };
