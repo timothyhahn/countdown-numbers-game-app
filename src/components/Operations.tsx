@@ -1,13 +1,18 @@
-import {Operation, getOperationSymbol, getOperationName} from '../types/Operation';
+import {
+	type Operation,
+	OperationSymbol,
+	getOperationSymbol,
+	getOperationName,
+} from '../types/Operation';
 
 export default function Operations() {
 	const operations = [
-		Operation.ADD,
-		Operation.SUBTRACT,
-		Operation.MULTIPLY,
-		Operation.DIVIDE,
-		Operation.OPEN_PAREN,
-		Operation.CLOSE_PAREN,
+		OperationSymbol.ADD,
+		OperationSymbol.SUBTRACT,
+		OperationSymbol.MULTIPLY,
+		OperationSymbol.DIVIDE,
+		OperationSymbol.OPEN_PAREN,
+		OperationSymbol.CLOSE_PAREN,
 	];
 
 	const handleDragStart = (e: React.DragEvent, operation: Operation) => {

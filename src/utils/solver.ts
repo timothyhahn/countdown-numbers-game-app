@@ -1,4 +1,4 @@
-import {Operation} from '../types/Operation';
+import {type Operation, OperationSymbol} from '../types/Operation';
 import {evaluateExpression} from './calculator';
 
 type ExpressionToken = number | Operation;
@@ -57,13 +57,13 @@ function hasValidStructure(expression: ExpressionToken[]): boolean {
 			}
 
 			expectNumber = false;
-		} else if (token === Operation.OPEN_PAREN) {
+		} else if (token === OperationSymbol.OPEN_PAREN) {
 			if (!expectNumber) {
 				return false;
 			}
 
 			parenCount++;
-		} else if (token === Operation.CLOSE_PAREN) {
+		} else if (token === OperationSymbol.CLOSE_PAREN) {
 			if (expectNumber || parenCount === 0) {
 				return false;
 			}
@@ -92,12 +92,12 @@ function canAddToken(expression: ExpressionToken[], token: ExpressionToken): boo
 		return expectsNumber(expression);
 	}
 
-	if (token === Operation.OPEN_PAREN) {
+	if (token === OperationSymbol.OPEN_PAREN) {
 		// Can add open paren if we expect a number
 		return expectsNumber(expression);
 	}
 
-	if (token === Operation.CLOSE_PAREN) {
+	if (token === OperationSymbol.CLOSE_PAREN) {
 		// Can add close paren if we don't expect a number and have open parens
 		return !expectsNumber(expression) && getOpenParenCount(expression) > 0;
 	}
@@ -120,7 +120,7 @@ function expectsNumber(expression: ExpressionToken[]): boolean {
 		return false;
 	}
 
-	if (lastToken === Operation.CLOSE_PAREN) {
+	if (lastToken === OperationSymbol.CLOSE_PAREN) {
 		return false;
 	}
 
@@ -133,11 +133,11 @@ function expectsNumber(expression: ExpressionToken[]): boolean {
 function getOpenParenCount(expression: ExpressionToken[]): number {
 	let count = 0;
 	for (const token of expression) {
-		if (token === Operation.OPEN_PAREN) {
+		if (token === OperationSymbol.OPEN_PAREN) {
 			count++;
 		}
 
-		if (token === Operation.CLOSE_PAREN) {
+		if (token === OperationSymbol.CLOSE_PAREN) {
 			count--;
 		}
 	}
@@ -177,7 +177,7 @@ function generateChildNodes(node: SolutionNode): SolutionNode[] {
 	// This helps prioritize finding simpler solutions first
 	if (children.length < 10) {
 		// Try adding each operation (only if the expression can accept an operation)
-		const operations = [Operation.ADD, Operation.SUBTRACT, Operation.MULTIPLY, Operation.DIVIDE];
+		const operations = [OperationSymbol.ADD, OperationSymbol.SUBTRACT, OperationSymbol.MULTIPLY, OperationSymbol.DIVIDE];
 
 		for (const op of operations) {
 			if (canAddToken(node.expression, op)) {
@@ -191,17 +191,17 @@ function generateChildNodes(node: SolutionNode): SolutionNode[] {
 
 		// Try adding parentheses (but with even more restriction to prevent explosion)
 		if (node.expression.length < 7) {
-			if (canAddToken(node.expression, Operation.OPEN_PAREN)) {
+			if (canAddToken(node.expression, OperationSymbol.OPEN_PAREN)) {
 				children.push(createNode(
-					[...node.expression, Operation.OPEN_PAREN],
+					[...node.expression, OperationSymbol.OPEN_PAREN],
 					node.usedNumbers,
 					node.availableNumbers,
 				));
 			}
 
-			if (canAddToken(node.expression, Operation.CLOSE_PAREN)) {
+			if (canAddToken(node.expression, OperationSymbol.CLOSE_PAREN)) {
 				children.push(createNode(
-					[...node.expression, Operation.CLOSE_PAREN],
+					[...node.expression, OperationSymbol.CLOSE_PAREN],
 					node.usedNumbers,
 					node.availableNumbers,
 				));

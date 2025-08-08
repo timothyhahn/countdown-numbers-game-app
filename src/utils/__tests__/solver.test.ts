@@ -2,22 +2,22 @@ import {describe, it, expect} from 'vitest';
 import {
 	solvePuzzle, getFirstSolution, formatExpression,
 } from '../solver';
-import {Operation} from '../../types/Operation';
+import {OperationSymbol} from '../../types/Operation';
 
 describe('solver', () => {
 	describe('formatExpression', () => {
 		it('should format simple expression', () => {
-			const expression = [2, Operation.ADD, 3];
+			const expression = [2, OperationSymbol.ADD, 3];
 			expect(formatExpression(expression)).toBe('2 + 3');
 		});
 
 		it('should format complex expression with parentheses', () => {
-			const expression = [Operation.OPEN_PAREN, 2, Operation.ADD, 3, Operation.CLOSE_PAREN, Operation.MULTIPLY, 4];
+			const expression = [OperationSymbol.OPEN_PAREN, 2, OperationSymbol.ADD, 3, OperationSymbol.CLOSE_PAREN, OperationSymbol.MULTIPLY, 4];
 			expect(formatExpression(expression)).toBe('( 2 + 3 ) × 4');
 		});
 
 		it('should format expression with all operations', () => {
-			const expression = [10, Operation.ADD, 5, Operation.SUBTRACT, 3, Operation.MULTIPLY, 2, Operation.DIVIDE, 4];
+			const expression = [10, OperationSymbol.ADD, 5, OperationSymbol.SUBTRACT, 3, OperationSymbol.MULTIPLY, 2, OperationSymbol.DIVIDE, 4];
 			expect(formatExpression(expression)).toBe('10 + 5 - 3 × 2 ÷ 4');
 		});
 	});

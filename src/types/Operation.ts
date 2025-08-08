@@ -1,4 +1,4 @@
-export const Operation = {
+export const OperationSymbol = {
 	ADD: '+',
 	SUBTRACT: '-',
 	MULTIPLY: '×',
@@ -7,33 +7,33 @@ export const Operation = {
 	CLOSE_PAREN: ')',
 } as const;
 
-export type Operation = typeof Operation[keyof typeof Operation];
+export type Operation = typeof OperationSymbol[keyof typeof OperationSymbol];
 
 export const getOperationSymbol = (operation: Operation): string => operation;
 
 export const getOperationName = (operation: Operation): string => {
 	switch (operation) {
-		case Operation.ADD: {
+		case OperationSymbol.ADD: {
 			return 'Addition';
 		}
 
-		case Operation.SUBTRACT: {
+		case OperationSymbol.SUBTRACT: {
 			return 'Subtraction';
 		}
 
-		case Operation.MULTIPLY: {
+		case OperationSymbol.MULTIPLY: {
 			return 'Multiplication';
 		}
 
-		case Operation.DIVIDE: {
+		case OperationSymbol.DIVIDE: {
 			return 'Division';
 		}
 
-		case Operation.OPEN_PAREN: {
+		case OperationSymbol.OPEN_PAREN: {
 			return 'Open Parenthesis';
 		}
 
-		case Operation.CLOSE_PAREN: {
+		case OperationSymbol.CLOSE_PAREN: {
 			return 'Close Parenthesis';
 		}
 	}
@@ -42,27 +42,27 @@ export const getOperationName = (operation: Operation): string => {
 export const parseOperation = (symbol: string): Operation | undefined => {
 	switch (symbol) {
 		case '+': {
-			return Operation.ADD;
+			return OperationSymbol.ADD;
 		}
 
 		case '-': {
-			return Operation.SUBTRACT;
+			return OperationSymbol.SUBTRACT;
 		}
 
 		case '×': {
-			return Operation.MULTIPLY;
+			return OperationSymbol.MULTIPLY;
 		}
 
 		case '÷': {
-			return Operation.DIVIDE;
+			return OperationSymbol.DIVIDE;
 		}
 
 		case '(': {
-			return Operation.OPEN_PAREN;
+			return OperationSymbol.OPEN_PAREN;
 		}
 
 		case ')': {
-			return Operation.CLOSE_PAREN;
+			return OperationSymbol.CLOSE_PAREN;
 		}
 
 		default: {
