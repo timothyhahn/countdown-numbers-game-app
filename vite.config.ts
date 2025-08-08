@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
+	base: '/countdown-numbers-game-app/',
 	plugins: [react(), tailwindcss()],
 	test: {
 		globals: true,
